@@ -1,10 +1,10 @@
 module FileModel
-  module Import
+  module Model
     extend ActiveSupport::Autoload
 
     eager_autoload do
-      autoload :Path
-      autoload :Dir
+      autoload :Base
+      autoload :File
     end
   end
 end
