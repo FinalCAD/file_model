@@ -7,4 +7,5 @@ module FileModel
 
   autoload :Import
   autoload :Model
+  autoload :Store
 end
