@@ -1,0 +1,23 @@
+{
+  "SubView": {
+    "SectorName": "R+1",
+    "ZoneName": "Logement 12-11",
+    "ShortName": "Logement 12-11",
+    "ViewName": "",
+    "ViewRank": 0,
+    "SubViewName": "Architecte",
+    "SubViewRank": 1,
+    "Tags": [
+      "PRINCIPAL"
+    ],
+    "HasValidNorth": false,
+    "AngleWithNorth": 0.0,
+    "Width": 16.45
+  },
+  "ZoneInfos": {
+    "Xrefs": [
+      "JJR-NOM-F-N1-0503-B1 B├ót. F  Etage 01"
+    ],
+    "attributes": {}
+  }
+}

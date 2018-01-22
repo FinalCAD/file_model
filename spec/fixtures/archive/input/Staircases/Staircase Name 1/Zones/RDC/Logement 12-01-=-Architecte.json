@@ -1,0 +1,23 @@
+{
+  "SubView": {
+    "SectorName": "RDC",
+    "ZoneName": "Logement 12-01",
+    "ShortName": "Logement 12-01",
+    "ViewName": "",
+    "ViewRank": 0,
+    "SubViewName": "Architecte",
+    "SubViewRank": 1,
+    "Tags": [
+      "PRINCIPAL"
+    ],
+    "HasValidNorth": false,
+    "AngleWithNorth": 0.0,
+    "Width": 25.33
+  },
+  "ZoneInfos": {
+    "Xrefs": [
+      "JJR-NOM-F-REZ-0502-B3 B├ót. F  Rez"
+    ],
+    "attributes": {}
+  }
+}
