@@ -12,6 +12,8 @@ Simple library to browse an directory structure and for each file instantiate a 
 
 [![Coverage Status](https://coveralls.io/repos/FinalCAD/file_model/badge.svg?branch=master&service=github)](https://coveralls.io/github/FinalCAD/file_model?branch=master)
 
+[![Inline docs](http://inch-ci.org/github/FinalCAD/file_model.svg?branch=master)](http://inch-ci.org/github/FinalCAD/file_model)
+
 ## Installation
 
 Add this line to your application's Gemfile:

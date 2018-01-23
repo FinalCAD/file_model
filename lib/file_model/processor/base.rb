@@ -9,6 +9,10 @@ module FileModel
         @options = options
       end
 
+      def skip?(model)
+        false
+      end
+
       private
 
       def run_command(cmd)
