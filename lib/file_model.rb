@@ -2,8 +2,6 @@ require "file_model/version"
 require 'active_support/all'
 require 'active_model'
 
-require 'file_model/configuration'
-
 module FileModel
   extend ActiveSupport::Autoload
 
@@ -12,6 +10,7 @@ module FileModel
   autoload :Store
   autoload :Export
   autoload :Processor
+  autoload :Configuration
 
   class << self
     attr_writer :configuration
