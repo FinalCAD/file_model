@@ -25,7 +25,7 @@ module FileModel
         instance = processor.new(options)
         registry.models.each do |name, model|
           run_callbacks :each do
-            instance.process(model: model, context: context)
+            instance.process(model: model, context: context.reverse_merge(options).reverse_merge(export_path: export_path))
             yield model
             @index += 1
           end

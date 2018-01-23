@@ -30,7 +30,7 @@ Or install it yourself as:
 
 ## Usage
 
-### Load model in memory
+### Import
 
 To load the models, we need to give an input directory where the original files can be found
 
@@ -49,7 +49,7 @@ class MyModel
 end
 ```
 
-How use it?
+#### How use it?
 
 You can instantiate to an instance to read a specific directory like
 ```
@@ -70,6 +70,48 @@ Or
 instance.each do |model|
   FileUtils.cp(model.source_path, "/to/whatever/path")
 end
+```
+
+## Processor
+
+A processor take a model an apply some modification on it. You can write your own processor :
+
+```
+class MyProcessor
+  include FileModel::Processor::Base
+
+  def process(model:, context: {})
+    # Do soemthing
+  end
+end
+```
+
+`FileModel::Processor::Base` share a hash of `options` for the processor.
+
+## Export
+
+For now all models are store in memory.
+
+You can instantiate a `FileModel::Export::Dir` this class take some arguments
+
+* `export_path:` - A String where we want to export files  
+* `processor:` - A Processor
+* `options:` - A Hash of shared options
+
+You can iterate on each model, the method each can take an extra context (Hash), `process` method will receive the Export::Dir options + the extra context if it given. NOTE options have the `:export_path` but you can override it.
+
+```
+dir_instance.each do |model|
+  # Here the model is retuned but the Processor doesn't return anything, it's only if you need to do an extra job after the model was processed.
+  puts("File: #{model.source_path} Successfully treated")
+end
+```
+
+You can also manually iterate
+
+```
+enumerator = dir_instance.each.to_enum
+model = enumerator.next
 ```
 
 ## Configuration
