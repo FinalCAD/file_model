@@ -12,7 +12,7 @@ RSpec.describe FileModel::Export::Dir do
   before do
     store = FileModel::Store::Memory.instance
     store.reset!
-    store.append_model(model)
+    store << model
   end
 
   before do
