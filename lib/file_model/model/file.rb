@@ -19,6 +19,10 @@ module FileModel
         ::File.dirname(source_path.gsub(root_path,'')).gsub(/^\//,'')
       end
 
+      def file_path
+        [ dir_path, full_name ].join(::File::SEPARATOR)
+      end
+
       def exploded_path
         @exploded_path ||= source_path.split(::File::SEPARATOR)
       end

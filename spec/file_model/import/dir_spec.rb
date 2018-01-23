@@ -2,7 +2,7 @@ require 'spec_helper'
 
 RSpec.describe FileModel::Import::Dir do
   let(:source_path) { 'spec/fixtures/archive/input' }
-  let(:subject)     { described_class.new(source_path: source_path, context: { a: :b }) }
+  let(:subject)     { described_class.new(source_path: source_path, options: { a: :b }) }
 
   describe '#next' do
     it {

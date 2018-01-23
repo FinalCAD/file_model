@@ -8,5 +8,6 @@ RSpec.describe FileModel::Model::File do
     expect(instance.full_name).to eql('image.png')
     expect(instance.extension).to eql('png')
     expect(instance.dir_path).to eql('path')
+    expect(instance.file_path).to eql('path/image.png')
   end
 end

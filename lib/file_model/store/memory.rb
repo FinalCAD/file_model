@@ -21,6 +21,11 @@ module FileModel
       def reset!
         @models = {}
       end
+
+      def size
+        models.keys.count
+      end
+
     end
   end
 end

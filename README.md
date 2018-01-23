@@ -83,7 +83,7 @@ class MyProcessor
   include FileModel::Processor::Base
 
   def process(model:, context: {})
-    # Do soemthing
+    # Do something
   end
 end
 ```
@@ -100,7 +100,7 @@ You can instantiate a `FileModel::Export::Dir` this class take some arguments
 * `processor:` - A Processor
 * `options:` - A Hash of shared options
 
-You can iterate on each model, the method each can take an extra context (Hash), `process` method will receive the Export::Dir options + the extra context if it given. NOTE options have the `:export_path` but you can override it.
+You can iterate on each model, the method `each` can take an extra context (Hash), `process` method will receive the Export::Dir options + the extra context if it given. NOTE options have the `:export_path` but you can override it.
 
 ```
 dir_instance.each do |model|
@@ -114,6 +114,25 @@ You can also manually iterate
 ```
 enumerator = dir_instance.each.to_enum
 model = enumerator.next
+```
+
+### Processor
+
+The Processor take an hash of `options` in his constructor. It is composed by 2 methods `skip?` and `process`
+
+```
+class CopyFile
+  include FileModel::Processor::Base
+
+  def skip?(model)
+    ::File.directory?(model.source_path) || options[:dry]
+  end
+
+  def process(model:, context: {})
+    FileUtils.cp(model.source_path, [ context[:export_path], model.file_path ].join(::File::SEPARATOR))
+    puts("File #{model.name} copied") unless options[:dry]
+  end
+end
 ```
 
 ## Configuration
