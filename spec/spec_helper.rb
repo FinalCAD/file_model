@@ -2,6 +2,11 @@ require "bundler/setup"
 require "file_model"
 
 begin
+  require 'pry'
+rescue LoadError
+end
+
+begin
   require 'coveralls'
   Coveralls.wear!
 rescue LoadError

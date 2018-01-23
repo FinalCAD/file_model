@@ -1,5 +1,3 @@
-require 'active_model'
-
 module FileModel
   module Import
     class Dir
