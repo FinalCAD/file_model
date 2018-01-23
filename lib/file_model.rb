@@ -10,6 +10,7 @@ module FileModel
   autoload :Import
   autoload :Model
   autoload :Store
+  autoload :Export
   autoload :Processor
 
   class << self
