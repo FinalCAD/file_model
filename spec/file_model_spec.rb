@@ -3,7 +3,17 @@ RSpec.describe FileModel do
     expect(FileModel::VERSION).not_to be nil
   end
 
-  # it "does something useful" do
-  #   expect(false).to eq(true)
-  # end
+  before do
+    FileModel.configure do |config|
+      config.store = :redis
+    end
+  end
+
+  it do
+    expect(FileModel.configuration.store).to eql(:redis)
+  end
+
+  after do
+    FileModel.reset
+  end
 end

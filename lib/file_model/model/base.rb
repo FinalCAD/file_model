@@ -3,7 +3,7 @@ module FileModel
     module Base
       extend ActiveSupport::Concern
 
-      attr_reader :context, :source_path, :index
+      attr_reader :context, :source_path, :index, :previous
 
       def initialize(path, options={})
         @source_path, @context = path, options[:context]
