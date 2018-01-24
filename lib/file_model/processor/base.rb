@@ -27,14 +27,11 @@ module FileModel
       #
       # Returns nothing.
       def copy(from, to)
-
-        # Ensure the destination is a Pathname, meaning you can give a String representing the path
-        _to = Pathname(to)
-        FileUtils.mkdir_p(_to)
+        FileUtils.mkdir_p(File.dirname(to))
         # _to.mkpath # Throw Gem::LoadError (fileutils is not part of the bundle. Add it to your Gemfile.)
 
         # NOTE: See if a move, or another trick to avoid copy can be done here, for performances matter.
-        FileUtils.cp(from.path, _to)
+        FileUtils.cp(from.path, to)
 
         # Clean Tempfile
         from.close  if from.respond_to?(:close) # Can be apply to File as well.
