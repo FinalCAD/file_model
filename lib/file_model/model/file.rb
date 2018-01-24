@@ -1,7 +1,8 @@
 module FileModel
   module Model
-    class File
+    module File
       include FileModel::Model::Base
+      extend ActiveSupport::Concern
 
       def extension
         source_path.extname

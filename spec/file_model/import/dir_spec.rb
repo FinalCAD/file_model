@@ -1,8 +1,12 @@
 require 'spec_helper'
 
+class MyModel
+  include FileModel::Model::File
+end
+
 RSpec.describe FileModel::Import::Dir do
   let(:source_path) { 'spec/fixtures/archive/input' }
-  let(:subject)     { described_class.new(source_path: source_path, options: { a: :b }) }
+  let(:subject)     { described_class.new(source_path: source_path, model: MyModel, options: { a: :b }) }
 
   describe '#next' do
     it {

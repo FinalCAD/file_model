@@ -20,7 +20,7 @@ module FileModel
       attr_reader :current_model
       attr_reader :previous_model
 
-      def initialize(source_path:, model: FileModel::Model::File, options: {})
+      def initialize(source_path:, model:, options: {})
         @path, @model, @options = Path.new(source_path), model, options.to_h.symbolize_keys
         reset
       end

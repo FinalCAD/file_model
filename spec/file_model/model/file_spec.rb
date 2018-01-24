@@ -1,7 +1,12 @@
 require 'spec_helper'
 
 RSpec.describe FileModel::Model::File do
-  let(:instance) { described_class.new('a/whatever where/path/image.png', { root_path: 'a/whatever where/', context: { a: :b }}) }
+  let(:instance) do
+    Class.new do
+      include FileModel::Model::File
+    end.new('a/whatever where/path/image.png', { root_path: 'a/whatever where/', context: { a: :b }})
+  end
+
   it do
     expect(instance.exploded_path).to eql(["a", "whatever where", "path", "image.png"])
     expect(instance.name.to_s).to eql('image')

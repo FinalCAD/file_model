@@ -2,7 +2,9 @@ require 'spec_helper'
 
 RSpec.describe FileModel::Export::Dir do
   let(:model) do
-    FileModel::Model::File.new('a/whatever/path/image.png', { root_path: 'a/whatever' })
+    Class.new do
+      include FileModel::Model::File
+    end.new('a/whatever/path/image.png', { root_path: 'a/whatever' })
   end
 
   let(:export_path) { 'tmp' }

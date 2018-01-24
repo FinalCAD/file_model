@@ -13,12 +13,12 @@ module FileModel
 
       attr_reader :options, :export_path, :index
 
-      def initialize(export_path:, processor:, options: {})
+      def initialize(export_path:, processor:, options: {}, store: FileModel::Store::Memory.instance)
         @export_path = Pathname(export_path)
         @options     = options
         @processor   = processor
         @index       = 0
-        @store       = FileModel::Store::Memory.instance
+        @store       = store
 
         FileUtils.mkdir_p(self.export_path)
 
@@ -44,7 +44,7 @@ module FileModel
         return to_enum(__callee__) unless block_given?
 
         instance = processor.new(options)
-        store.models.each do |name, model|
+        collection.each do |name, model|
           run_callbacks :each do
             next if instance.skip?(model)
             instance.process(model: model, context: context.reverse_merge(options).reverse_merge(export_path: export_path))
@@ -54,6 +54,10 @@ module FileModel
         end
 
         nil
+      end
+
+      def collection
+        store.models
       end
 
       delegate :size, to: :store
