@@ -10,11 +10,11 @@ RSpec.describe FileModel::Processor::Prefix do
   before do
     expect(instance).to receive(:copy).with(
       OpenStruct.new(path: 'a/whatever/path/image.png'),
-      OpenStruct.new(path: 'somewhere/else/path/prefix/image.png')
+      Pathname('somewhere/else/path/PREFIX/image.png')
     )
   end
 
   it do
-    instance.process(model: model, context: { export_path: 'somewhere/else' })
+    instance.process(model: model, context: { export_path: Pathname('somewhere/else') })
   end
 end

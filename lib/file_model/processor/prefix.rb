@@ -11,15 +11,16 @@ module FileModel
         return if skip?(model)
 
         copy(
-          compose_path([ model.source_path ]),
-          compose_path([ context[:export_path], model.dir_path, 'prefix', model.full_name])
+          OpenStruct.new(path: model.source_path.to_s), # Fake a Tempfile
+          compose_path(model: model, context: context)
         )
       end
 
       private
 
-      def compose_path(array)
-        OpenStruct.new(path: array.join(::File::SEPARATOR))
+      # Returns an Pathname
+      def compose_path(model:, context:)
+        context[:export_path] + model.dir_path + Pathname('PREFIX') + model.full_name
       end
 
     end

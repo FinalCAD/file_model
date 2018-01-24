@@ -10,11 +10,10 @@ RSpec.describe FileModel::Model::Base do
 
   it do
     expect(instance.context).to eql({ a: :b })
-    expect(instance.source_path).to eql('a/whatever/path')
+    expect(instance.source_path.to_s).to eql('a/whatever/path')
     expect(instance.index).to eql(0)
     expect(instance.previous).to eql(:nothing)
     expect(instance).to_not be_skip
   end
-
 
 end

@@ -16,16 +16,16 @@ RSpec.describe FileModel::Import::Path do
     subject { instance.reset! }
 
     it 'sets the state back to reset!' do
-      expect(instance.read_path).to eql('spec/fixtures/archive/input/Staircases')
+      expect(instance.read_path.to_s).to eql('spec/fixtures/archive/input/Staircases')
       second_path? instance
       subject
       start? instance
-      expect(instance.read_path).to eql('spec/fixtures/archive/input/Staircases')
+      expect(instance.read_path.to_s).to eql('spec/fixtures/archive/input/Staircases')
     end
 
     def second_path?(instance)
       expect(instance.index).to eql(0)
-      expect(instance.current_path).to eql('spec/fixtures/archive/input/Staircases')
+      expect(instance.current_path.to_s).to eql('spec/fixtures/archive/input/Staircases')
     end
   end
 
@@ -47,7 +47,7 @@ RSpec.describe FileModel::Import::Path do
   end
 
   describe '#next_path' do
-    subject { instance.next_path }
+    subject { instance.next_path.to_s }
 
     it 'returns the next path without changing the state' do
       start? instance
@@ -60,9 +60,9 @@ RSpec.describe FileModel::Import::Path do
     before { 2.times.each { instance.read_path }}
 
     it 'works and goes to end paths' do
-      expect(instance.previous_path).to eql('spec/fixtures/archive/input/Staircases')
-      expect(instance.current_path).to  eql('spec/fixtures/archive/input/Staircases/Staircase Name 1')
-      expect(instance.next_path).to     eql('spec/fixtures/archive/input/Staircases/Staircase Name 1/Sectors')
+      expect(instance.previous_path.to_s).to eql('spec/fixtures/archive/input/Staircases')
+      expect(instance.current_path.to_s).to  eql('spec/fixtures/archive/input/Staircases/Staircase Name 1')
+      expect(instance.next_path.to_s).to     eql('spec/fixtures/archive/input/Staircases/Staircase Name 1/Sectors')
     end
   end
 
@@ -74,8 +74,8 @@ RSpec.describe FileModel::Import::Path do
   describe '#read_path' do
 
     it 'works and goes to end paths' do
-      expect(instance.read_path).to eql('spec/fixtures/archive/input/Staircases')
-      expect(instance.read_path).to eql('spec/fixtures/archive/input/Staircases/Staircase Name 1')
+      expect(instance.read_path.to_s).to eql('spec/fixtures/archive/input/Staircases')
+      expect(instance.read_path.to_s).to eql('spec/fixtures/archive/input/Staircases/Staircase Name 1')
       # and so on....
     end
   end

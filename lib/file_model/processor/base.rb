@@ -20,11 +20,26 @@ module FileModel
         nil
       end
 
+      # Private: Internal method for copying files
+      #
+      # from  - The File, here is expected to receive a File of Tempfile
+      # to    - The Pathname where we want to copy the file (Should be a String representing the path)
+      #
+      # Returns nothing.
       def copy(from, to)
-        FileUtils.mkdir_p(File.dirname(to.path.to_s))
-        FileUtils.cp(from.path.to_s, to.path.to_s)
-        from.close  if from.respond_to?(:close)
-        from.unlink if from.respond_to?(:unlink)
+
+        # Ensure the destination is a Pathname, meaning you can give a String representing the path
+        _to = Pathname(to)
+        FileUtils.mkdir_p(_to)
+        # _to.mkpath # Throw Gem::LoadError (fileutils is not part of the bundle. Add it to your Gemfile.)
+
+        # NOTE: See if a move, or another trick to avoid copy can be done here, for performances matter.
+        FileUtils.cp(from.path, _to)
+
+        # Clean Tempfile
+        from.close  if from.respond_to?(:close) # Can be apply to File as well.
+        from.unlink if from.respond_to?(:unlink) # Only for Tempfile
+
         nil
       end
 

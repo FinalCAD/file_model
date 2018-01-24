@@ -2,6 +2,8 @@ require "file_model/version"
 require 'active_support/all'
 require 'active_model'
 
+require 'fileutils'
+
 module FileModel
   extend ActiveSupport::Autoload
 

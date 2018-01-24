@@ -4,27 +4,31 @@ module FileModel
       include FileModel::Model::Base
 
       def extension
-        ::File.extname(exploded_path.last).gsub(/^\./,'')
+        source_path.extname
       end
 
       def name
-        ::File.basename(exploded_path.last, ".#{extension}")
+        source_path.basename(".*")
       end
 
       def full_name
-        exploded_path.last
+        source_path.basename
       end
 
       def dir_path
-        ::File.dirname(source_path.gsub(root_path,'')).gsub(/^\//,'')
+        Pathname(source_path.to_s.gsub(root_path.to_s,'').gsub(/^\//,'')).dirname
       end
 
       def file_path
-        [ dir_path, full_name ].join(::File::SEPARATOR)
+        dir_path + full_name
+      end
+
+      def escaped
+        Pathname(source_path.to_s.gsub(/ /,'\ '))
       end
 
       def exploded_path
-        @exploded_path ||= source_path.split(::File::SEPARATOR)
+        @exploded_path ||= source_path.to_s.split(::File::SEPARATOR)
       end
 
     end

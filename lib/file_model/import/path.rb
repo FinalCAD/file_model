@@ -7,7 +7,7 @@ module FileModel
       attr_reader :current_path
 
       def initialize(dir_path)
-        @root_path, @index = dir_path, -1
+        @root_path, @index = Pathname(dir_path), -1
         reset!
       end
 
@@ -56,7 +56,7 @@ module FileModel
       protected
 
       def ruby_path
-        @ruby_path ||= ::Dir.glob("#{root_path}/**/*").sort
+        @ruby_path ||= root_path.glob("**/*")
       end
 
       def set_end

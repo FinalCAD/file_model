@@ -14,7 +14,7 @@ module FileModel
 
       def append_model(model)
         return unless model.name
-        models[model.name] ||= model
+        models[model.name.to_s] ||= model
       end
       alias_method :<<, :append_model
 

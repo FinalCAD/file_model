@@ -14,13 +14,13 @@ module FileModel
       attr_reader :options, :export_path, :index
 
       def initialize(export_path:, processor:, options: {})
-        @export_path = export_path
+        @export_path = Pathname(export_path)
         @options     = options
         @processor   = processor
         @index       = 0
-        @store    = FileModel::Store::Memory.instance
+        @store       = FileModel::Store::Memory.instance
 
-        FileUtils::mkdir_p(export_path)
+        FileUtils.mkdir_p(self.export_path)
 
         nil
       end

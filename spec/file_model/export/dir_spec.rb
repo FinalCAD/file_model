@@ -18,14 +18,14 @@ RSpec.describe FileModel::Export::Dir do
   before do
     expect_any_instance_of(processor).to receive(:copy).with(
       OpenStruct.new(path: 'a/whatever/path/image.png'),
-      OpenStruct.new(path: 'tmp/path/prefix/image.png')
+      Pathname('tmp/path/PREFIX/image.png')
     )
   end
 
   describe '#each' do
     it do
       subject.each do |model|
-        expect(model.source_path).to eql('a/whatever/path/image.png')
+        expect(model.source_path.to_s).to eql('a/whatever/path/image.png')
       end
     end
   end
@@ -34,7 +34,7 @@ RSpec.describe FileModel::Export::Dir do
     it 'implement Enumerator Pattern' do
       enum  = subject.each.to_enum
       model = enum.next
-      expect(model.source_path).to eql('a/whatever/path/image.png')
+      expect(model.source_path.to_s).to eql('a/whatever/path/image.png')
     end
   end
 end
