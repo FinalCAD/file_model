@@ -17,9 +17,9 @@ module FileModel
 
       class_methods do
         def next(path:, context: {}, previous: nil)
+          path.read_path # Read the line and assign the result to current_path
           return if path.end?
 
-          path.read_path # Read the line and assign the result to current_path
           new(path.current_path, root_path: path.root_path, index: path.index, context: context, previous: previous)
         end
       end
