@@ -3,10 +3,13 @@ module FileModel
     module Base
       extend ActiveSupport::Concern
 
-      attr_reader :options
+      included do
+        attr_reader :options, :export_path
+      end
 
       def initialize(options={})
-        @options = options
+        @options     = options
+        @export_path = Pathname(options[:export_path]) if options[:export_path]
       end
 
       def skip?(model)
@@ -28,10 +31,14 @@ module FileModel
       # Returns nothing.
       def copy(from, to)
         FileUtils.mkdir_p(File.dirname(to))
-        # _to.mkpath # Throw Gem::LoadError (fileutils is not part of the bundle. Add it to your Gemfile.)
+        # Pathname(a_path_to).mkpath # Throw Gem::LoadError (fileutils is not part of the bundle. Add it to your Gemfile.)
+
+        # NOTE: Give the path regardless if is a File of Pathname
+        path = from.path if from.respond_to?(:path)
+        path ||= from
 
         # NOTE: See if a move, or another trick to avoid copy can be done here, for performances matter.
-        FileUtils.cp(from.path, to)
+        FileUtils.cp(path, to)
 
         # Clean Tempfile
         from.close  if from.respond_to?(:close) # Can be apply to File as well.

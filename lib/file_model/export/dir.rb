@@ -15,7 +15,7 @@ module FileModel
 
       def initialize(export_path:, processor:, options: {}, store: FileModel::Store::Memory.instance)
         @export_path = Pathname(export_path)
-        @options     = options
+        @options     = options.reverse_merge(export_path: export_path)
         @processor   = processor
         @index       = 0
         @store       = store
@@ -44,10 +44,12 @@ module FileModel
         return to_enum(__callee__) unless block_given?
 
         instance = processor.new(options)
+
         collection.each do |name, model|
+
           run_callbacks :each do
             next if instance.skip?(model)
-            instance.process(model: model, context: context.reverse_merge(options).reverse_merge(export_path: export_path))
+            instance.process(model: model, context: options.merge(context))
             yield model
             @index += 1
           end

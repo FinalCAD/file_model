@@ -9,6 +9,7 @@ module FileModel
 
       def process(model:, context: {})
         return if skip?(model)
+        context = options.merge(context)
 
         copy(
           OpenStruct.new(path: model.source_path.to_s), # Fake a Tempfile
@@ -20,7 +21,7 @@ module FileModel
 
       # Returns an Pathname
       def compose_path(model:, context:)
-        context[:export_path] + model.dir_path + Pathname('PREFIX') + model.full_name
+        (export_path || context[:export_path]) + model.dir_path + Pathname('PREFIX') + model.full_name
       end
 
     end

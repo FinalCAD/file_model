@@ -6,7 +6,7 @@ module FileModel
       attr_reader :context, :source_path, :index, :previous, :root_path
 
       def initialize(path, options={})
-        @source_path, @context = Pathname(path), options[:context]
+        @source_path, @context = Pathname(path), (options[:context] || {})
         @index, @previous      = options[:index], options[:previous].try(:dup) # Let GC clean unlinked previous instance
         @root_path             = Pathname(options[:root_path].to_s) # If given, the directory where the files are
       end
