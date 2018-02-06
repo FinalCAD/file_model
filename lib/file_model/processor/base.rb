@@ -7,6 +7,11 @@ module FileModel
         attr_reader :options, :export_path
       end
 
+      # Public: Based on FileModel::Processor::Base
+      #
+      # options - The Hash of options, NOTE if the options do have the export_path: 'path' some processor might fail
+      #
+      # Returns the current instance
       def initialize(options={})
         @options     = options
         @export_path = Pathname(options[:export_path]) if options[:export_path]

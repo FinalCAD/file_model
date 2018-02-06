@@ -11,8 +11,13 @@ module FileModel
         @root_path             = Pathname(options[:root_path].to_s) # If given, the directory where the files are
       end
 
+      # Public: If this methode retrun true it will be ignore during the iteration on import 
+      #
+      # Likely testing File, Extension and so on.
+      #
+      # Returns Boolean
       def skip?
-        false
+        false 
       end
 
       class_methods do
